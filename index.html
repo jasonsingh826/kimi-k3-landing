@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kimi K3 on Nebius Token Factory — Available Now for APAC Enterprises</title>
+<meta name="description" content="Nebius is the Day 0 launch partner for Kimi K3. APAC enterprises can run the frontier open-weight model in production today, with forward deployed engineering support and reference architectures.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#052B42;            /* Nebius dark petrol navy */
+    --ink-soft:rgba(5,43,66,.72);
+    --ink-faint:rgba(5,43,66,.52);
+    --navy:#082F4A;           /* dark card background */
+    --navy-deep:#04222F;
+    --lime:#E0FF4F;           /* Nebius official lime (from logo.svg) */
+    --lavender:#DCDCF9;       /* announcement banner */
+    --cloud:#F2F6FA;          /* light card background */
+    --sky:#E8F0FB;            /* light blue card */
+    --line:rgba(5,43,66,.12);
+    --line-light:rgba(255,255,255,.16);
+    --radius-lg:24px;
+    --radius:16px;
+    --radius-btn:12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter','Helvetica Neue',Arial,Helvetica,sans-serif;
+    background:#FFFFFF;color:var(--ink);
+    -webkit-font-smoothing:antialiased;line-height:1.55;
+  }
+  .wrap{max-width:1256px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,h4{font-weight:700;letter-spacing:.015em;line-height:1.12}
+
+  /* ---------- Announcement banner ---------- */
+  .banner{background:var(--lavender);text-align:center;font-size:14px;padding:10px 20px;font-weight:500}
+  .banner a{text-decoration:underline;font-weight:600}
+
+  /* ---------- Nav ---------- */
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px)}
+  .nav-inner{display:flex;align-items:center;gap:34px;height:66px}
+  .logo{display:inline-flex;align-items:center}
+  .logo svg{height:34px;width:auto;display:block}
+  .nav-links{display:flex;gap:28px;font-size:15px;font-weight:600;color:var(--ink)}
+  .nav-links a{opacity:.9}
+  .nav-links a:hover{opacity:1}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border-radius:var(--radius-btn);font-weight:600;font-size:15px;
+    padding:12px 24px;cursor:pointer;transition:all .16s ease;border:none;font-family:inherit;
+  }
+  .btn-navy{background:var(--ink);color:#fff}
+  .btn-navy:hover{background:#0B3B57}
+  .btn-outline{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn-outline:hover{border-color:rgba(5,43,66,.4)}
+  .btn-white{background:#fff;color:var(--ink)}
+  .btn-white:hover{background:#EDF3F8}
+  .btn-lime{background:var(--lime);color:var(--ink)}
+  .btn-lime:hover{background:#E3FC7E}
+  .btn svg{width:18px;height:18px;flex-shrink:0}
+  .btn-lg:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(5,43,66,.18)}
+  .btn .arr{transition:transform .16s ease}
+  .btn:hover .arr{transform:translateX(3px)}
+  .btn-ghost-dark{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(4px)}
+  .btn-ghost-dark:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.22)}
+  .btn-sm{padding:10px 20px;font-size:14.5px}
+  .btn-lg{padding:15px 30px;font-size:16px}
+
+  /* ---------- Hero (dark rounded card on white) ---------- */
+  .hero-shell{padding:14px 0 0}
+  .hero{
+    position:relative;overflow:hidden;
+    background:linear-gradient(118deg,#0E3550 0%,#082F4A 42%,#04364A 72%,#063A3F 100%);
+    border-radius:var(--radius-lg);
+    padding:96px 72px;color:#fff;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 46% 62% at 84% 40%,rgba(147,235,72,.32),transparent 62%),
+      radial-gradient(ellipse 30% 45% at 68% 78%,rgba(64,190,255,.20),transparent 65%),
+      radial-gradient(ellipse 26% 38% at 96% 12%,rgba(88,130,255,.22),transparent 65%);
+  }
+  .cube{position:absolute;border-radius:14px;border:1px solid rgba(255,255,255,.35);background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.03));backdrop-filter:blur(2px);pointer-events:none}
+  .cube.c1{width:92px;height:92px;right:120px;top:84px;transform:rotate(-4deg);background:linear-gradient(135deg,rgba(178,255,102,.30),rgba(64,190,255,.10))}
+  .cube.c2{width:64px;height:64px;right:250px;top:210px;transform:rotate(7deg)}
+  .cube.c3{width:120px;height:120px;right:70px;top:250px;transform:rotate(3deg);background:linear-gradient(135deg,rgba(64,190,255,.25),rgba(178,255,102,.08))}
+  .cube.c4{width:52px;height:52px;right:330px;top:110px;transform:rotate(-9deg)}
+  .cube.c5{width:78px;height:78px;right:210px;top:330px;transform:rotate(-3deg);background:linear-gradient(135deg,rgba(178,255,102,.22),rgba(255,255,255,.05))}
+  .hero-content{position:relative;max-width:640px}
+  .live-pill{
+    display:inline-flex;align-items:center;gap:9px;
+    background:rgba(215,247,90,.14);border:1px solid rgba(215,247,90,.45);
+    color:var(--lime);font-size:13.5px;font-weight:600;
+    border-radius:999px;padding:7px 16px;margin-bottom:28px;
+  }
+  .live-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero h1{font-size:clamp(38px,4.8vw,58px);margin-bottom:22px}
+  .hero .sub{font-size:19px;font-weight:500;margin-bottom:10px}
+  .hero .sub2{font-size:16.5px;color:rgba(255,255,255,.78);margin-bottom:38px;max-width:560px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+  .hero-ctas .btn-lg{flex:none;width:330px;height:56px;padding:0 20px;white-space:nowrap;font-size:15.5px}
+  @media (max-width:1120px){.hero-ctas .btn-lg{width:100%;max-width:360px}}
+  .hero-note{font-size:13.5px;color:rgba(255,255,255,.6)}
+
+  /* ---------- Stats ---------- */
+  .stats{padding:64px 0 8px}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .stat{border-top:2px solid var(--ink);padding-top:18px}
+  .stat b{display:block;font-size:40px;font-weight:700;letter-spacing:.01em;line-height:1.05;margin-bottom:6px}
+  .stat span{font-size:14.5px;color:var(--ink-soft)}
+
+  /* ---------- Sections ---------- */
+  section{padding:88px 0}
+  h2{font-size:clamp(28px,3.4vw,40px);margin-bottom:16px}
+  .section-sub{font-size:17px;color:var(--ink-soft);max-width:700px;margin-bottom:48px}
+
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .card-light{
+    background:var(--cloud);border-radius:var(--radius);padding:30px;
+    transition:transform .18s ease;
+  }
+  .card-light:hover{transform:translateY(-3px)}
+  .card-light h3{font-size:19px;margin-bottom:10px}
+  .card-light p{font-size:15px;color:var(--ink-soft)}
+  .chip{
+    display:inline-flex;align-items:center;justify-content:center;
+    background:var(--lime);color:var(--ink);border-radius:10px;
+    width:42px;height:42px;font-size:19px;margin-bottom:18px;
+  }
+
+  /* ---------- First mover ---------- */
+  .split{display:grid;grid-template-columns:1.02fr .98fr;gap:60px;align-items:center}
+  .dark-panel{
+    background:linear-gradient(135deg,#0B3450,#04222F);
+    border-radius:var(--radius-lg);padding:36px;color:#fff;
+  }
+  .t-row{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line-light)}
+  .t-row:last-child{border-bottom:none}
+  .t-badge{flex-shrink:0;width:100px;text-align:center;font-size:12.5px;font-weight:700;border-radius:8px;padding:6px 0;height:fit-content;letter-spacing:.03em}
+  .t-live{background:var(--lime);color:var(--ink)}
+  .t-dim{background:rgba(255,255,255,.08);color:rgba(255,255,255,.55);border:1px solid var(--line-light)}
+  .t-row h4{font-size:16px;margin-bottom:4px}
+  .t-row p{font-size:13.5px;color:rgba(255,255,255,.7)}
+
+  /* ---------- FDE dark cards ---------- */
+  .card-dark{
+    background:linear-gradient(150deg,#0C3854 0%,#082F4A 55%,#053241 100%);
+    border-radius:var(--radius-lg);padding:38px;color:#fff;position:relative;overflow:hidden;
+  }
+  .card-dark::after{
+    content:"";position:absolute;right:-60px;bottom:-80px;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle,rgba(147,235,72,.22),transparent 70%);pointer-events:none;
+  }
+  .card-dark h3{font-size:22px;margin-bottom:12px}
+  .card-dark p{font-size:15px;color:rgba(255,255,255,.78)}
+  .card-dark ul{list-style:none;margin-top:18px;position:relative;z-index:1}
+  .card-dark ul li{font-size:14.5px;color:rgba(255,255,255,.85);padding:8px 0 8px 28px;position:relative}
+  .card-dark ul li::before{content:"✓";position:absolute;left:0;color:var(--lime);font-weight:700}
+
+  /* ---------- Architecture ---------- */
+  .arch{background:var(--sky);border-radius:var(--radius-lg);padding:42px;margin-top:20px}
+  .arch-kicker{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:24px}
+  .arch-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:stretch}
+  .arch-node{background:#fff;border-radius:14px;padding:22px 18px;text-align:center;box-shadow:0 1px 3px rgba(5,43,66,.08)}
+  .arch-node.hl{background:var(--ink);color:#fff}
+  .arch-node.hl span{color:rgba(255,255,255,.75)}
+  .arch-node b{display:block;font-size:14.5px;margin-bottom:6px}
+  .arch-node span{font-size:12.5px;color:var(--ink-soft);line-height:1.45;display:block}
+  .arch-arrow{display:flex;align-items:center;justify-content:center;color:var(--ink-faint);font-size:20px;padding:0 12px}
+  .arch-foot{margin-top:28px;padding-top:22px;border-top:1px solid var(--line);display:flex;gap:30px;flex-wrap:wrap}
+  .arch-foot span{font-size:13.5px;color:var(--ink-soft)}
+  .arch-foot b{color:var(--ink);font-weight:600}
+
+  /* ---------- Trust ---------- */
+  .trust{padding:56px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+  .trust p{font-size:12.5px;color:var(--ink-faint);margin-bottom:24px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  .trust-logos{display:flex;justify-content:center;gap:52px;flex-wrap:wrap;color:var(--ink-soft);font-weight:700;font-size:19px;opacity:.7}
+
+  /* ---------- Final CTA ---------- */
+  .cta-shell{padding:40px 0 90px}
+  .cta-final{
+    position:relative;overflow:hidden;
+    background:linear-gradient(120deg,#0D3550 0%,#04222F 60%,#063A3F 100%);
+    border-radius:var(--radius-lg);padding:88px 72px;color:#fff;
+  }
+  .cta-final::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 50% 70% at 90% 80%,rgba(147,235,72,.25),transparent 65%);
+  }
+  .cta-final .inner{position:relative;max-width:720px}
+  .cta-final h2{margin-bottom:16px}
+  .cta-final p{color:rgba(255,255,255,.78);font-size:17px;margin-bottom:38px;max-width:620px}
+
+  /* ---------- Footer ---------- */
+  footer{padding:56px 0 44px;font-size:14.5px}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+  .foot-links{display:flex;gap:34px;flex-wrap:wrap;font-weight:600}
+  .foot-links a:hover{opacity:.7}
+  .foot-legal{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink-faint)}
+
+  .pp-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+  @media (max-width:980px){
+    .nav-links{display:none}
+    .pp-grid{grid-template-columns:1fr;gap:32px}
+    .hero{padding:64px 32px}
+    .cube{display:none}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .grid-3,.grid-2{grid-template-columns:1fr}
+    .split{grid-template-columns:1fr;gap:36px}
+    .arch-flow{grid-template-columns:1fr}
+    .arch-arrow{transform:rotate(90deg);padding:8px 0}
+    section{padding:60px 0}
+    .cta-final{padding:60px 32px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ ANNOUNCEMENT ============ -->
+<div class="banner">Kimi K3 is live on Nebius Token Factory. Your first call is five lines of code away — <a href="#contact">book your APAC architecture session →</a></div>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="wrap nav-inner">
+    <a class="logo" href="#" aria-label="Nebius"><svg width="131" height="36" viewBox="0 0 131 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M121.519 0H8.98085C4.02167 0 0 4.06364 0 9.07661V26.9234C0 31.9364 4.02167 36 8.98085 36H121.519C126.48 36 130.5 31.9364 130.5 26.9234V9.07661C130.5 4.06364 126.478 0 121.519 0Z" fill="#E0FF4F"/><path d="M16.1411 9.55438C17.7334 9.55438 18.8563 10.4347 19.5442 12.0049L23.7455 21.7049C24.8103 24.1575 26.8178 23.8787 26.8178 23.8787C26.8178 25.2604 25.7328 26.5519 24.1385 26.5519C22.5443 26.5519 21.4233 25.6696 20.7355 24.0994L16.5322 14.4014C15.4714 11.9508 13.4619 12.2276 13.4619 12.2276V26.3073H10.125V16.2644C10.125 12.4403 13.4436 12.2284 13.4619 12.2276C13.4619 10.8459 14.5489 9.55438 16.1411 9.55438ZM84.6687 18.5786C84.6687 21.6448 86.5899 23.4596 89.8968 23.4596C93.2036 23.4596 95.1507 21.6468 95.1507 18.5786V9.78899H98.4837V18.5245C98.4836 23.3774 95.0706 26.5518 89.8968 26.5519C84.7229 26.5519 81.3358 23.3514 81.3358 18.5245V9.78899H84.6687V18.5786ZM110.53 9.54224C114.204 9.58635 119.931 10.2522 120.264 14.8786H116.588C116.263 12.5364 111.071 12.4581 108.418 12.7248C108.4 12.7255 105.22 12.8559 105.22 14.4395C105.218 14.4509 105.004 15.8764 108.157 16.168C108.506 16.2021 113.134 16.5872 113.464 16.6133L113.708 16.6374C116.396 16.9142 117.803 17.0585 119.444 18.378H119.44L119.432 18.3819C121.122 19.8499 121.393 23.1207 118.822 24.8052C116.492 26.2992 113.574 26.4857 110.883 26.5519C106.932 26.5519 101.273 25.7798 101.279 20.8025H104.913C105.029 21.9716 105.715 22.6735 106.912 23.0164C108.328 23.4115 109.698 23.4617 111.041 23.4718C114.109 23.4718 117.097 22.9703 116.905 21.2337C116.728 19.6595 114.635 19.499 113.644 19.4228C113.614 19.4208 113.584 19.4188 113.554 19.4167C112.92 19.3667 109.973 19.1871 109.958 19.1862C108.103 19.0539 106.754 18.8514 105.927 18.701C104.135 18.3661 103.258 17.6781 102.683 17.1748C101.203 15.7831 100.972 12.6787 103.333 11.1205C105.44 9.74885 108.095 9.6024 110.53 9.54224ZM63.9131 9.78899C66.7828 9.80704 70.4648 10.4568 70.4648 14.295C70.4648 15.9795 69.7186 17.1186 68.8182 17.7122L68.8163 17.7143C69.7127 17.9831 71.4955 19.2484 71.4955 21.6348C71.4955 24.4162 69.8791 26.3134 64.9218 26.3134V26.3073H54.1751V9.78899H63.9131ZM50.7399 12.9134H36.9488V16.4729H49.2459V19.5973H36.9488V23.1829H50.7399V26.3073H33.5879V9.78899H50.7399V12.9134ZM77.8984 26.3073H74.5375V9.78899H77.8984V26.3073ZM30.1568 19.8419C30.1568 23.676 26.8217 23.8785 26.8178 23.8787V9.79898H30.1568V19.8419ZM57.5401 23.1829H64.97V23.1809C66.5262 23.1789 68.0241 22.9302 68.0241 21.354C68.0241 19.7778 66.3717 19.479 64.9238 19.479V19.471H57.5401V23.1829ZM57.538 16.543H64.9681C65.8785 16.535 67.2361 16.2422 67.2361 14.8465C67.236 13.4508 66.0529 12.9095 64.5088 12.9095H57.538V16.543Z" fill="#052B42"/></svg></a>
+    <div class="nav-links">
+      <a href="#">Products</a>
+      <a href="#">Solutions</a>
+      <a href="#">Why Nebius</a>
+      <a href="#">Resources</a>
+      <a href="#">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn btn-outline btn-sm" href="#contact">Contact sales</a>
+      <a class="btn btn-navy btn-sm" href="#">Log in</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<div class="hero-shell">
+  <div class="wrap">
+    <header class="hero">
+      <span class="cube c1"></span><span class="cube c2"></span><span class="cube c3"></span><span class="cube c4"></span><span class="cube c5"></span>
+      <div class="hero-content">
+        <div class="live-pill"><span class="dot"></span>Live now · Official Day 0 launch partner</div>
+        <h1>Kimi-K3. Available first in APAC on Nebius Token Factory.</h1>
+        <p class="sub">Ranked #1 on the Frontend Code Arena, ahead of every closed frontier model — at $3 in / $15 out per million tokens.</p>
+        <div class="hero-ctas" style="margin-top:36px">
+          <a class="btn btn-white btn-lg" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Talk to sales</a>
+          <a class="btn btn-ghost-dark btn-lg" href="#workshop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg>Register for live Kimi-K3 workshop</a>
+          <a class="btn btn-lime btn-lg" href="#dev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg>Use Kimi-K3 now<span class="arr">→</span></a>
+        </div>
+        <div class="hero-note">OpenAI-compatible API · Enterprise SLAs · No waitlist</div>
+      </div>
+    </header>
+  </div>
+</div>
+
+<!-- ============ STATS ============ -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat"><b>#1</b><span>on the Frontend Code Arena — ahead of every closed frontier model</span></div>
+      <div class="stat"><b>$3 / $15</b><span>per million input / output tokens — open-model economics</span></div>
+      <div class="stat"><b>1M</b><span>token context window for entire codebases and document sets</span></div>
+      <div class="stat"><b>Day 0</b><span>availability — live on Nebius, waitlisted elsewhere</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PRICE-PERFORMANCE ============ -->
+<section id="math" style="padding-bottom:30px">
+  <div class="wrap">
+    <div class="dark-panel" style="padding:64px 60px;border-radius:var(--radius-lg)">
+      <h2 style="max-width:760px">The chart every AI team in APAC is arguing about this quarter</h2>
+      <p style="color:rgba(255,255,255,.75);font-size:16.5px;max-width:680px;margin:14px 0 44px">Open weights didn't just catch the frontier — on frontend coding, they passed it. Kimi K3 ranks #1 on the Arena Frontend Code leaderboard, ahead of every closed frontier model, while its per-token pricing sits an order of magnitude below typical closed frontier rates. Better ceiling. Radically different bill.</p>
+      <div class="pp-grid">
+        <div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:18px">Frontend Code Arena — Arena score (higher is better)</div>
+          <div style="margin-bottom:13px">
+            <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px"><span style="font-weight:700;color:var(--lime)">🏆 Kimi-K3 (open weights)</span><span style="color:var(--lime);font-weight:700">1,679</span></div>
+            <div style="height:11px;border-radius:6px;background:rgba(255,255,255,.12)"><div style="height:100%;width:100%;border-radius:6px;background:var(--lime)"></div></div>
+          </div>
+          <div style="margin-bottom:13px">
+            <div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:5px"><span style="color:rgba(255,255,255,.8)">Claude Fable 5</span><span style="color:rgba(255,255,255,.7)">1,631</span></div>
+            <div style="height:11px;border-radius:6px;background:rgba(255,255,255,.12)"><div style="height:100%;width:79%;border-radius:6px;background:rgba(255,255,255,.42)"></div></div>
+          </div>
+          <div style="margin-bottom:13px">
+            <div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:5px"><span style="color:rgba(255,255,255,.8)">GPT-5.6 Sol (xHigh)</span><span style="color:rgba(255,255,255,.7)">1,618</span></div>
+            <div style="height:11px;border-radius:6px;background:rgba(255,255,255,.12)"><div style="height:100%;width:73%;border-radius:6px;background:rgba(255,255,255,.42)"></div></div>
+          </div>
+          <div style="margin-bottom:13px">
+            <div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:5px"><span style="color:rgba(255,255,255,.8)">Claude Opus 4.8 (Thinking)</span><span style="color:rgba(255,255,255,.7)">1,562</span></div>
+            <div style="height:11px;border-radius:6px;background:rgba(255,255,255,.12)"><div style="height:100%;width:49%;border-radius:6px;background:rgba(255,255,255,.42)"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:5px"><span style="color:rgba(255,255,255,.8)">Grok-4.5</span><span style="color:rgba(255,255,255,.7)">1,558</span></div>
+            <div style="height:11px;border-radius:6px;background:rgba(255,255,255,.12)"><div style="height:100%;width:47%;border-radius:6px;background:rgba(255,255,255,.42)"></div></div>
+          </div>
+          <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:16px">Source: Arena.ai Frontend Code leaderboard (arena.ai/leaderboard/code)</div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:18px">What you pay per million tokens</div>
+          <div style="display:flex;gap:16px">
+            <div style="flex:1;background:rgba(255,255,255,.06);border:1px solid var(--line-light);border-radius:14px;padding:22px">
+              <div style="font-size:13.5px;color:rgba(255,255,255,.6);margin-bottom:6px">Typical closed frontier API</div>
+              <div style="font-size:26px;font-weight:700">$$$$</div>
+              <div style="font-size:13px;color:rgba(255,255,255,.55);margin-top:4px">plus lock-in, plus opacity</div>
+            </div>
+            <div style="flex:1;background:rgba(215,247,90,.12);border:1px solid rgba(215,247,90,.5);border-radius:14px;padding:22px">
+              <div style="font-size:13.5px;color:var(--lime);margin-bottom:6px">Kimi K3 on Nebius</div>
+              <div style="font-size:26px;font-weight:700;color:var(--lime)">$3 in / $15 out</div>
+              <div style="font-size:13px;color:rgba(255,255,255,.65);margin-top:4px">open weights — no lock-in, ever</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:44px">
+        <a class="btn btn-white" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8" y2="11.01"/><line x1="12" y1="11" x2="12" y2="11.01"/><line x1="16" y1="11" x2="16" y2="11.01"/><line x1="8" y1="15" x2="8" y2="15.01"/><line x1="12" y1="15" x2="12" y2="15.01"/><line x1="16" y1="15" x2="16" y2="18.5"/></svg>Run the numbers with our team<span class="arr">→</span></a>
+        <span style="font-size:14px;color:rgba(255,255,255,.6)">Bring your current inference bill — we'll model the K3 migration line by line.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IN THE NEWS ============ -->
+<section id="news" style="padding-bottom:30px">
+  <div class="wrap">
+    <h2>🔥 The launch everyone is covering</h2>
+    <p class="section-sub">Don't take our word for it. Kimi-K3 rattled markets, topped leaderboards and dominated the AI news cycle within 48 hours of launch. Here's what the world's most credible tech press is saying.</p>
+
+    <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/moonshot-releases-2-8-trillion-parameter-kimi-k3" target="_blank" rel="noopener" style="display:block;background:linear-gradient(135deg,#0C3854,#04222F);border-radius:var(--radius-lg);padding:40px 44px;color:#fff;margin-bottom:20px;transition:transform .18s ease" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+        <span style="background:var(--lime);color:var(--ink);font-weight:700;font-size:12.5px;letter-spacing:.06em;border-radius:8px;padding:5px 12px">TOM'S HARDWARE</span>
+        <span style="font-size:13px;color:rgba(255,255,255,.55)">July 2026</span>
+        <span style="font-size:13px;background:rgba(215,247,90,.15);border:1px solid rgba(215,247,90,.4);color:var(--lime);border-radius:999px;padding:4px 12px">🏆 Featured — the benchmark story</span>
+      </div>
+      <div style="font-size:clamp(20px,2.4vw,27px);font-weight:700;letter-spacing:.01em;line-height:1.25;max-width:900px">"China's 2.8-trillion-parameter Kimi K3 beats Claude Fable 5 in Frontend Code Arena benchmark — Moonshot AI delivers largest open-weight AI model ever"</div>
+      <div style="margin-top:18px;font-size:14.5px;color:var(--lime);font-weight:600">Read the story <span class="arr" style="display:inline-block">→</span></div>
+    </a>
+
+    <div class="grid-2" style="grid-template-columns:repeat(2,1fr)">
+      <a href="https://www.bloomberg.com/news/articles/2026-07-17/china-s-powerful-new-moonshot-ai-model-closes-gap-with-us-rivals" target="_blank" rel="noopener" class="card-light" style="display:block">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <span style="background:var(--ink);color:#fff;font-weight:700;font-size:12.5px;letter-spacing:.06em;border-radius:8px;padding:5px 12px">BLOOMBERG</span>
+          <span style="font-size:13px;color:var(--ink-faint)">July 17, 2026</span>
+        </div>
+        <h3 style="line-height:1.35">📈 "Moonshot Unveils Kimi K3 AI Model, Narrowing Gap With US Rivals"</h3>
+        <p style="margin-top:8px">The markets story: why K3's price-performance sent a shockwave through the AI trade.</p>
+        <div style="margin-top:14px;font-size:14px;font-weight:600;color:var(--ink)">Read on Bloomberg <span class="arr" style="display:inline-block">→</span></div>
+      </a>
+      <a href="https://www.cnbc.com/2026/07/17/moonshot-ai-kimi-k3-model-openai-anthropic-china.html" target="_blank" rel="noopener" class="card-light" style="display:block">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <span style="background:var(--ink);color:#fff;font-weight:700;font-size:12.5px;letter-spacing:.06em;border-radius:8px;padding:5px 12px">CNBC</span>
+          <span style="font-size:13px;color:var(--ink-faint)">July 17, 2026</span>
+        </div>
+        <h3 style="line-height:1.35">⚡ "China's Moonshot AI unveils Kimi K3 that rivals OpenAI, Anthropic"</h3>
+        <p style="margin-top:8px">Benchmark wins over Claude Opus 4.8 and GPT-5.5 on coding and agentic tasks — per Moonshot.</p>
+        <div style="margin-top:14px;font-size:14px;font-weight:600;color:var(--ink)">Read on CNBC <span class="arr" style="display:inline-block">→</span></div>
+      </a>
+      <a href="https://venturebeat.com/technology/chinas-moonshot-ai-releases-kimi-k3-the-largest-open-source-model-ever-rivaling-top-u-s-systems" target="_blank" rel="noopener" class="card-light" style="display:block">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <span style="background:var(--ink);color:#fff;font-weight:700;font-size:12.5px;letter-spacing:.06em;border-radius:8px;padding:5px 12px">VENTUREBEAT</span>
+          <span style="font-size:13px;color:var(--ink-faint)">July 2026</span>
+        </div>
+        <h3 style="line-height:1.35">🌏 "Moonshot AI releases Kimi K3, the largest open-source model ever, rivaling top U.S. systems"</h3>
+        <p style="margin-top:8px">The deep dive on the architecture: 2.8T parameters, Stable LatentMoE, and 1M-token context.</p>
+        <div style="margin-top:14px;font-size:14px;font-weight:600;color:var(--ink)">Read on VentureBeat <span class="arr" style="display:inline-block">→</span></div>
+      </a>
+      <a href="https://techcrunch.com/2026/07/18/kimi-threat-or-menace/" target="_blank" rel="noopener" class="card-light" style="display:block">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <span style="background:var(--ink);color:#fff;font-weight:700;font-size:12.5px;letter-spacing:.06em;border-radius:8px;padding:5px 12px">TECHCRUNCH</span>
+          <span style="font-size:13px;color:var(--ink-faint)">July 18, 2026</span>
+        </div>
+        <h3 style="line-height:1.35">💥 "Kimi: Threat or menace?"</h3>
+        <p style="margin-top:8px">The debate piece: what a frontier-class open model means for the proprietary AI business model.</p>
+        <div style="margin-top:14px;font-size:14px;font-weight:600;color:var(--ink)">Read on TechCrunch <span class="arr" style="display:inline-block">→</span></div>
+      </a>
+    </div>
+    <p style="font-size:13px;color:var(--ink-faint);margin-top:18px">Headlines link to external publications. Coverage does not imply endorsement of Nebius.</p>
+  </div>
+</section>
+
+<!-- ============ DEV QUICKSTART ============ -->
+<section id="dev" style="padding-bottom:20px">
+  <div class="wrap">
+    <div class="arch" style="margin-top:0;background:var(--sky)">
+      <h2 style="font-size:clamp(24px,2.8vw,32px)">Your first K3 call, before your coffee cools</h2>
+      <p style="color:var(--ink-soft);font-size:16px;margin:10px 0 26px;max-width:640px">Already built on an OpenAI-compatible API? Then you've already built on Kimi K3 — change the base URL and go.</p>
+      <pre style="background:var(--ink);color:#E8F0FB;border-radius:14px;padding:26px 30px;font-size:14.5px;line-height:1.7;overflow-x:auto;font-family:'SF Mono',Menlo,Consolas,monospace"><code>from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.tokenfactory.nebius.com",
+    api_key="NEBIUS_API_KEY")
+
+response = client.chat.completions.create(
+    model="moonshotai/kimi-k3",
+    messages=[{"role": "user", "content": "Ship something great."}])</code></pre>
+      <div class="arch-foot" style="border-top:none;padding-top:20px;margin-top:0;align-items:center;justify-content:space-between">
+        <span><b>Free to start</b> · console access in minutes · 99.9% uptime SLA when you scale</span>
+        <a class="btn btn-navy" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>Get your API key<span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY KIMI K3 ============ -->
+<section id="why">
+  <div class="wrap">
+    <h2>The model your build-vs-buy debate<br>has been waiting for</h2>
+    <p class="section-sub">Kimi K3 is the first open-weight model to reach frontier-level performance. Proprietary-class output, open-model control: your data, your deployment, your economics. Here's what your architects will care about.</p>
+    <div class="grid-3">
+      <div class="card-light">
+        <div class="chip">🧠</div>
+        <h3>Reasoning on by default</h3>
+        <p>K3 ships with thinking mode always on — frontier-level reasoning and long-horizon agentic coding without switching between model variants.</p>
+      </div>
+      <div class="card-light">
+        <div class="chip">👁️</div>
+        <h3>Natively multimodal</h3>
+        <p>Understands documents, charts, screenshots and images out of the box — ideal for claims processing, KYC, contract review and operations workflows.</p>
+      </div>
+      <div class="card-light">
+        <div class="chip">🌏</div>
+        <h3>Strong multilingual performance</h3>
+        <p>Built by Moonshot AI with deep Asian-language capability across Chinese, Japanese, Korean and Southeast Asian languages — a fit for regional customer bases.</p>
+      </div>
+      <div class="card-light">
+        <div class="chip">🔓</div>
+        <h3>Open weights, your terms</h3>
+        <p>No black box, no lock-in. Run K3 as a managed endpoint today and move to dedicated or self-hosted deployments as your governance requirements evolve.</p>
+      </div>
+      <div class="card-light">
+        <div class="chip">📄</div>
+        <h3>1M-token context</h3>
+        <p>Load entire loan books, regulatory filings, codebases or policy libraries into a single call — fewer pipelines, less retrieval complexity.</p>
+      </div>
+      <div class="card-light">
+        <div class="chip">💸</div>
+        <h3>The economics that change the roadmap</h3>
+        <p>Sparse MoE activates just 16 of 896 experts per token. That's how you get frontier output at $3/$15 per million tokens — and how use cases you shelved on cost grounds suddenly pencil out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIRST MOVER ============ -->
+<section id="first" style="padding-top:20px">
+  <div class="wrap split">
+    <div>
+      <h2>While others announce, your team ships.</h2>
+      <p class="section-sub" style="margin-bottom:24px">As Moonshot AI's official Day 0 launch partner, Nebius made Kimi K3 available in production the moment it launched. Somewhere in your market, a competitor is already evaluating it. The question is who gets it into production first.</p>
+      <p style="color:var(--ink-soft);font-size:15.5px;margin-bottom:32px">Choose the model, call the API. Behind that simplicity sits Nebius-optimized inference, dedicated capacity, enterprise billing and full documentation — engineered from silicon to API, so your team spends the quarter shipping, not procuring GPUs.</p>
+      <a class="btn btn-navy" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>Claim the head start</a>
+    </div>
+    <div class="dark-panel">
+      <div class="t-row">
+        <div class="t-badge t-live">LIVE NOW</div>
+        <div><h4>Nebius Token Factory</h4><p>Day 0 partner. OpenAI-compatible API, console access, enterprise SLAs and dedicated capacity — available today.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-badge t-dim">WAITLIST</div>
+        <div><h4>Other inference providers</h4><p>Still onboarding a 2.8T-parameter model. Capacity, optimization and enterprise terms to follow.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-badge t-dim">MONTHS</div>
+        <div><h4>Self-hosting</h4><p>~1.4TB of VRAM, cluster engineering and inference optimization before your first production token.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FDE + REFERENCE ARCHITECTURE ============ -->
+<section id="fde" style="padding-top:20px">
+  <div class="wrap">
+    <h2>You don't adopt a frontier model alone.<br>Our engineers deploy with you.</h2>
+    <p class="section-sub">Nebius pairs every enterprise engagement with forward deployed engineers (FDEs) and battle-tested reference architectures — so Kimi K3 goes from proof of concept to production in weeks, not quarters.</p>
+    <div class="grid-2">
+      <div class="card-dark">
+        <h3>Forward deployed engineering</h3>
+        <p>Nebius FDEs embed directly with your teams across APAC time zones to design, build and harden your K3 workloads.</p>
+        <ul>
+          <li>Use-case scoping and model evaluation against your own data</li>
+          <li>Prompt, agent and fine-tuning strategy for K3's thinking mode</li>
+          <li>Latency, throughput and cost optimization for production traffic</li>
+          <li>Free white-glove PoC with 24/7 support by default</li>
+        </ul>
+      </div>
+      <div class="card-dark">
+        <h3>Reference architectures, ready to use</h3>
+        <p>Proven blueprints for the patterns enterprises deploy most — adapted to your stack, security posture and compliance requirements.</p>
+        <ul>
+          <li>Agentic workflows and long-horizon coding assistants</li>
+          <li>1M-context RAG over enterprise document estates</li>
+          <li>Multimodal document intelligence (KYC, claims, contracts)</li>
+          <li>Migration paths from proprietary APIs — OpenAI-compatible, drop-in</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arch">
+      <div class="arch-kicker">Sample reference architecture — Enterprise agentic platform on Kimi K3</div>
+      <div class="arch-flow">
+        <div class="arch-node"><b>Your applications</b><span>Internal copilots, customer-facing agents, document pipelines</span></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node"><b>Gateway &amp; governance</b><span>SSO, audit logging, PII controls, usage &amp; cost management</span></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node hl"><b>Nebius Token Factory</b><span>Kimi K3 · OpenAI-compatible API · autoscaling dedicated endpoints</span></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node"><b>Your data plane</b><span>Vector stores, enterprise search, tools &amp; internal APIs</span></div>
+      </div>
+      <div class="arch-foot">
+        <span><b>Delivered with:</b> deployment guides · Terraform modules · evaluation harnesses · cookbooks</span>
+        <span><b>Designed for:</b> enterprise security review, data governance and regional compliance requirements</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKSHOP ============ -->
+<section id="workshop" style="padding-top:0">
+  <div class="wrap">
+    <div style="background:var(--lavender);border-radius:var(--radius-lg);padding:52px 60px;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center" class="pp-grid">
+      <div>
+        <div style="font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px">Live virtual workshop · APAC edition</div>
+        <h2 style="font-size:clamp(24px,2.8vw,34px)">Building with Kimi-K3: from first call to production</h2>
+        <p style="color:var(--ink-soft);font-size:16px;margin:14px 0 0;max-width:560px">90 minutes, live with Nebius forward deployed engineers. Live-coding K3 on Token Factory, walking through the reference architectures, and open Q&amp;A on migration, cost modeling and enterprise deployment. Sessions timed for SGT, JST, IST and AEST.</p>
+      </div>
+      <div style="text-align:center">
+        <a class="btn btn-navy btn-lg" href="#" style="width:100%;max-width:300px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 15l2 2 4-4"/></svg>Register free<span class="arr">→</span></a>
+        <div style="font-size:13px;color:var(--ink-faint);margin-top:12px">Seats are limited per session — recording available to registrants.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<div class="trust">
+  <div class="wrap">
+    <p>Trusted by the AI ecosystem</p>
+    <div class="trust-logos">
+      <span>Shopify</span><span>Revolut</span><span>Cursor</span><span>Photoroom</span><span>Recraft</span><span>Sword Health</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APAC USE CASES ============ -->
+<section id="apac">
+  <div class="wrap">
+    <h2>Where APAC enterprises are putting K3 to work</h2>
+    <p class="section-sub">From Singapore to Sydney, Tokyo to Mumbai — our APAC team helps enterprises match Kimi K3's capabilities to the workloads that matter in this region.</p>
+    <div class="grid-3">
+      <div class="card-light">
+        <div class="chip">🏦</div>
+        <h3>Financial services</h3>
+        <p>Multilingual customer agents, research summarization across full filings, and document intelligence for KYC and claims — with deployment options that support your governance requirements.</p>
+      </div>
+      <div class="card-light">
+        <div class="chip">🏭</div>
+        <h3>Manufacturing &amp; logistics</h3>
+        <p>Agentic workflows over ERP and supply-chain systems, multimodal inspection of technical documents, and engineering copilots across regional language teams.</p>
+      </div>
+      <div class="card-light">
+        <div class="chip">📱</div>
+        <h3>Telco, tech &amp; digital natives</h3>
+        <p>Long-horizon coding agents on 1M-token context, high-volume customer support at open-model economics, and rapid migration via the OpenAI-compatible API.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<div class="cta-shell" id="contact">
+  <div class="wrap">
+    <div class="cta-final">
+      <div class="inner">
+        <div class="live-pill"><span class="dot"></span>Nebius APAC — enterprise team</div>
+        <h2>Frontier AI just got 10x cheaper. What will your team do with the difference?</h2>
+        <p>Book a 30-minute session with our APAC enterprise team. Bring your hardest use case and your current inference bill — leave with a reference architecture, a migration cost model, and a free white-glove PoC scoped with our forward deployed engineers. The leaderboard has flipped — an open model tops the frontier on code. The advantage now goes to whoever ships it first.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-white btn-lg" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Talk to sales</a>
+          <a class="btn btn-ghost-dark btn-lg" href="#workshop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none"/></svg>Register for live Kimi-K3 workshop</a>
+          <a class="btn btn-lime btn-lg" href="#dev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></svg>Use Kimi-K3 now<span class="arr">→</span></a>
+        </div>
+        <div class="hero-note" style="margin-top:20px">Kimi-K3 is live in the Token Factory console — your first call is five lines away.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a class="logo" href="#" aria-label="Nebius" style="opacity:.95"><svg width="131" height="36" viewBox="0 0 131 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:auto"><path d="M121.519 0H8.98085C4.02167 0 0 4.06364 0 9.07661V26.9234C0 31.9364 4.02167 36 8.98085 36H121.519C126.48 36 130.5 31.9364 130.5 26.9234V9.07661C130.5 4.06364 126.478 0 121.519 0Z" fill="#E0FF4F"/><path d="M16.1411 9.55438C17.7334 9.55438 18.8563 10.4347 19.5442 12.0049L23.7455 21.7049C24.8103 24.1575 26.8178 23.8787 26.8178 23.8787C26.8178 25.2604 25.7328 26.5519 24.1385 26.5519C22.5443 26.5519 21.4233 25.6696 20.7355 24.0994L16.5322 14.4014C15.4714 11.9508 13.4619 12.2276 13.4619 12.2276V26.3073H10.125V16.2644C10.125 12.4403 13.4436 12.2284 13.4619 12.2276C13.4619 10.8459 14.5489 9.55438 16.1411 9.55438ZM84.6687 18.5786C84.6687 21.6448 86.5899 23.4596 89.8968 23.4596C93.2036 23.4596 95.1507 21.6468 95.1507 18.5786V9.78899H98.4837V18.5245C98.4836 23.3774 95.0706 26.5518 89.8968 26.5519C84.7229 26.5519 81.3358 23.3514 81.3358 18.5245V9.78899H84.6687V18.5786ZM110.53 9.54224C114.204 9.58635 119.931 10.2522 120.264 14.8786H116.588C116.263 12.5364 111.071 12.4581 108.418 12.7248C108.4 12.7255 105.22 12.8559 105.22 14.4395C105.218 14.4509 105.004 15.8764 108.157 16.168C108.506 16.2021 113.134 16.5872 113.464 16.6133L113.708 16.6374C116.396 16.9142 117.803 17.0585 119.444 18.378H119.44L119.432 18.3819C121.122 19.8499 121.393 23.1207 118.822 24.8052C116.492 26.2992 113.574 26.4857 110.883 26.5519C106.932 26.5519 101.273 25.7798 101.279 20.8025H104.913C105.029 21.9716 105.715 22.6735 106.912 23.0164C108.328 23.4115 109.698 23.4617 111.041 23.4718C114.109 23.4718 117.097 22.9703 116.905 21.2337C116.728 19.6595 114.635 19.499 113.644 19.4228C113.614 19.4208 113.584 19.4188 113.554 19.4167C112.92 19.3667 109.973 19.1871 109.958 19.1862C108.103 19.0539 106.754 18.8514 105.927 18.701C104.135 18.3661 103.258 17.6781 102.683 17.1748C101.203 15.7831 100.972 12.6787 103.333 11.1205C105.44 9.74885 108.095 9.6024 110.53 9.54224ZM63.9131 9.78899C66.7828 9.80704 70.4648 10.4568 70.4648 14.295C70.4648 15.9795 69.7186 17.1186 68.8182 17.7122L68.8163 17.7143C69.7127 17.9831 71.4955 19.2484 71.4955 21.6348C71.4955 24.4162 69.8791 26.3134 64.9218 26.3134V26.3073H54.1751V9.78899H63.9131ZM50.7399 12.9134H36.9488V16.4729H49.2459V19.5973H36.9488V23.1829H50.7399V26.3073H33.5879V9.78899H50.7399V12.9134ZM77.8984 26.3073H74.5375V9.78899H77.8984V26.3073ZM30.1568 19.8419C30.1568 23.676 26.8217 23.8785 26.8178 23.8787V9.79898H30.1568V19.8419ZM57.5401 23.1829H64.97V23.1809C66.5262 23.1789 68.0241 22.9302 68.0241 21.354C68.0241 19.7778 66.3717 19.479 64.9238 19.479V19.471H57.5401V23.1829ZM57.538 16.543H64.9681C65.8785 16.535 67.2361 16.2422 67.2361 14.8465C67.236 13.4508 66.0529 12.9095 64.5088 12.9095H57.538V16.543Z" fill="#052B42"/></svg></a>
+      <div class="foot-links">
+        <a href="#">Token Factory</a>
+        <a href="#">AI Cloud</a>
+        <a href="#">Documentation</a>
+        <a href="#">Pricing</a>
+        <a href="#">Company</a>
+        <a href="#">Investors</a>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 Nebius B.V. All rights reserved.</span>
+      <span>Privacy · Terms · Trademark guidelines</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
